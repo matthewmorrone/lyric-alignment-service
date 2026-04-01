@@ -1,0 +1,18 @@
+[Unit]
+Description=Lyric Alignment API
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/alignment
+Environment=PYTHONUNBUFFERED=1
+Environment=STABLE_TS_MODEL=base
+Environment=STABLE_TS_LANGUAGE=ja
+Environment=STABLE_TS_DOWNLOAD_ROOT=/home/pi/alignment/.cache/stable-ts
+ExecStart=/usr/bin/python3 /home/pi/alignment/run_service.py serve --host 0.0.0.0 --port 8000 --auto-install
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
